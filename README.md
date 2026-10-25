@@ -1,32 +1,59 @@
+# Document-Aware Chatbot with LangGraph
 
-# Project Overview
+A conversational AI prototype that combines an LLM with a LangGraph workflow and PDF question answering. It supports general questions and questions grounded in user-provided documents, with a Streamlit-based interface.
 
-This project is a Chatbot powered by LangGraph workflows and large language models. The chatbot is capable of:
+## Features
 
-💬 Answering user questions in natural language.
+- 💬 Natural-language chat interface.
+- 📄 PDF upload and document-grounded question answering.
+- 🧭 LangGraph-based workflow orchestration.
+- 🧩 Separate backend and frontend modules for easier iteration.
+- 🔌 LLM integration through a provider API.
 
-📂 Uploading and processing PDF documents, allowing users to ask questions based on the content of the uploaded PDF.
+## Architecture at a glance
 
-🧠 Using LangGraph agents to manage workflows and retrieve context-aware answers.
-
-Currently, the chatbot integrates an OpenAI 120B parameter model. While this model does not provide real-time answers from the internet, it excels at understanding text, reasoning, and generating responses based on the provided context (such as your uploaded documents).
-
-✨ Key Features
-
-Question answering on both general queries and document-specific queries.
-
-Context retrieval from PDFs for accurate and relevant answers.
-
-Modular LangGraph-based design, making it easy to extend with new tools and agents.
-
-Streamlit-based frontend for a simple and interactive user experience.
-
-
-## API Reference
-
-#### Get all items
-
-```http
-  https://console.groq.com/home
+```text
+User
+ └── Streamlit frontend (Chatbot_frontend.py)
+       └── Chatbot workflow / backend (Chatbot_backend.py)
+             ├── LLM provider
+             └── PDF context and response generation
 ```
 
+## Repository structure
+
+| File | Purpose |
+|---|---|
+| `Chatbot_frontend.py` | User-facing chat interface |
+| `Chatbot_backend.py` | Chat workflow and model integration |
+| `README.md` | Project documentation |
+
+## Getting started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/B23BB1046/Chatbot-using-LangGraph.git
+   cd Chatbot-using-LangGraph
+   ```
+2. Create and activate a virtual environment.
+3. Install the packages imported by the Python files. Add a `requirements.txt` for a reproducible setup.
+4. Set the required model-provider API key as an environment variable; never commit API keys.
+5. Start the frontend:
+   ```bash
+   streamlit run Chatbot_frontend.py
+   ```
+
+## Tech stack
+
+Python · LangGraph · LLM API · Streamlit · PDF question answering
+
+## Limitations and next steps
+
+- Answers depend on the quality of document extraction and retrieved context.
+- Validate citations and factual claims before relying on generated answers.
+- Add dependency pinning, structured logging, error handling, and example screenshots.
+- Evaluate answer quality with a small set of test questions and expected evidence.
+
+## Security
+
+Store credentials in environment variables or a local `.env` file excluded by `.gitignore`. Do not upload private PDFs or secrets to a public repository.
